@@ -1,13 +1,26 @@
 import React, {useState} from 'react'
-import {Select} from '@mui/material';
+
+
 const DropDownList = (props) => {
-  const { city:newCity, setCity } = props;
-  const handleClick = () => {
-    setCity(newCity + 1)
+  const { city, setCity } = props;
+  const cityList = ['new york', 'toronto', 'omaha'];
+  const cityElements = [];
+  cityList.forEach(city => {
+    cityElements.push(<option value={`${$city}`}>{`${city}`}</option>)
+  });
+  const handleChange = (event) => {
+    setCity(event.target.value)
   }
   return (
-     <button onClick={handleClick}></button>
-    
+    <>
+      <label>
+        Select your city
+        <select selectedCity={selectedCity} onChange={handleChange}>
+          {cityElements}
+        </select>
+      </label>
+    </>
+
   )
 }
 

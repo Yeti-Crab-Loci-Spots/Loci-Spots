@@ -1,4 +1,6 @@
+
 import React, { useState, useEffect } from "react";
+
 import DropDownList from "./DropDownList";
 
 const MainContainer = () => {
@@ -24,9 +26,11 @@ const MainContainer = () => {
   }, [])
   return (
     <div>
+
       <div>MainContainer {city}</div>
     <div className="citySearch">
         <DropDownList setCity={setCity} city ={city} />
+
     </div>
     <div className="restaurantContainer"></div>
     </div>
