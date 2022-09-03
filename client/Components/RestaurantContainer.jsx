@@ -8,11 +8,11 @@ const RestaurantContainer = (props) => {
 const {restaurantList, city} = props;
 const restaurantArr = [];
   
-restaurantList.forEach(el => {
-    restaurantArr.push()
-    <Restaurant />
+// restaurantList.forEach(el => {
+//     restaurantArr.push()
+//     <Restaurant />
         
-});
+// });
   
   return (
     <div>

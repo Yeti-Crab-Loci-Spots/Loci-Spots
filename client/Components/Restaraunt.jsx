@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default Restaurant = (props) => {
-    const {}
+    // const {}
     return (
     <div className="RestaurantBox">
       <h1>Restaurant Name</h1>
