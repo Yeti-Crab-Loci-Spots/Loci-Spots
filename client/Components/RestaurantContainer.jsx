@@ -7,29 +7,54 @@ const RestaurantContainer = (props) => {
 //* loop through the list of restaurants and for each element make a restaurant div
   const [restaurantList, setRestaurants] = useState({})
   const [restoArray, setRestoArray] = useState([]);
-  const [currentVote, setVote] = useState({});
+  const [currentVote, setVote] = useState({ resto_id: 0, action: '' });
+  const fetchCity = async () => {
+    const response = await fetch(`/api/${city}`)
+    const cityData = await response.json()
+    // setRestaurants(cityData);
+    console.log(cityData[city], 'in fetchcity')
+    const tmpArr = [];
+    cityData[city].forEach((el, i) => {
+      tmpArr.push(
+        <Restaurant setVote={setVote} currentVote={currentVote} key={i} restoObj={el} />
+      )
+    });
+    setRestoArray(tmpArr);
+  }  
  useEffect(() => {
     // console.log('in use effect,', city)
     try {
-        const fetchCity = async () => {
-          const response = await fetch(`/api/${city}`)
-          const cityData = await response.json()
-          // setRestaurants(cityData);
-          console.log(cityData[city], 'in fetchcity')
-          const tmpArr = [];
-          cityData[city].forEach((el, i) => {
-            tmpArr.push(
-              <Restaurant key={i} restoObj={el} />
-            )
-          });
-          setRestoArray(tmpArr);
-        }  
+
         fetchCity();
     } catch (error) {
         console.log('City not Found!', error)
     }
     
  }, [city])
+  useEffect(() => {
+    try {
+      const updateVotes = async () => {
+        console.log(currentVote);
+        console.log('in update votes');
+        const { resto_id, action } = currentVote;
+        const response = await fetch('/api/',
+          {
+            method: 'PATCH',
+            body: JSON.stringify({ resto_id, action }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          fetchCity();
+        console.log(response);
+      }
+      updateVotes();
+
+      //run fetch city to re render
+    } catch (error) {
+      console.log('Error in updateVotes,', error)
+    }
+  }, [currentVote])
 
 // console.log(restaurantList[city],'restaurantList')
 

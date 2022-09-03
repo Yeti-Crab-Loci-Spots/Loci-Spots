@@ -1,13 +1,17 @@
 import React from 'react'
 
 const Restaurant = (props) => {
-  const { restoObj  } = props;
+  const { restoObj, setVote, currentVote  } = props;
   const {resto_id, restoname, address, city, foodtype, link, votes } = restoObj;
   const handleUpVote = (e) => {
-    setVote({resto_id, action: 'upvote'})
+    console.log('in handle up vote')
+    console.log(resto_id, votes);
+    setVote({ resto_id: resto_id, action: 'upvote'})
+    // console.log(currentVote);
   }
   const handleDownVote = (e) => {
-    setVote({ resto_id, action: 'downvote' })
+    
+    setVote({ resto_id, action: 'downvote'})
 
   }
     return (
@@ -17,8 +21,8 @@ const Restaurant = (props) => {
       <h3>{foodtype}</h3>
       <h3>{link}</h3>
       <h3>{votes}</h3>
-      <button className="upVote" onClick={() => handleUpVote}>up</button>
-      <button className="downVote" onClick={() => handleDownVote}>down</button>
+      <button className="upVote" onClick={handleUpVote}>up</button>
+      <button className="downVote" onClick={handleDownVote}>down</button>
     </div>
   )
 }
