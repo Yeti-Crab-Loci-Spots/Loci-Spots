@@ -28,13 +28,12 @@ const MainContainer = () => {
   return (
     <div>
 
-      <div>MainContainer {city}</div>
     <div className="citySearch">
         <DropDownList setCity={setCity} city ={city} cityList = {cities} />
 
     </div>
     <div className="restaurantContainer">
-        <RestaurantContainer restaurantList={restaurantList} />
+        <RestaurantContainer city={ city } restaurantList={restaurantList} />
     </div>
     </div>
 
