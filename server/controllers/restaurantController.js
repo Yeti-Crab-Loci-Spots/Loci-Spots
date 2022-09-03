@@ -18,10 +18,13 @@ const restaurantController = {};
 // get all restaurants
 restaurantController.getRestaurants = async (req, res, next) => {
   try {
+    // TO DO: QUERY BY CITY ie. 'New York'
     const queryString = `SELECT * FROM resto ORDER BY votes DESC`;
 
     const result = await db.query(queryString);
     res.locals.restaurants = result.rows;
+    // TO DO: RETURN IN THIS FORMAT
+    // {cityName: [{restaurantName: 'TAO', rating: 5, cuisine: 'Chinese'}, {restaurantName: 'restaurant2', rating: 4, cuisine: 'Thai'}]}
     return next();
   } catch (err) {
     return next({
@@ -75,7 +78,7 @@ restaurantController.updateRestaurant = async (req, res, next) => {
 // delete a restaurant
 restaurantController.deleteRestaurant = async (req, res, next) => {
   try {
-    const { name } = req.body;
+    const { resto_id } = req.body;
     const queryString = `DELETE FROM resto WHERE resto_id=${resto_id}`;
 
     const result = await db.query(queryString);
