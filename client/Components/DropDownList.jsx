@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import {Select} from '@mui/material';
 const DropDownList = (props) => {
-  const { citySearch:city } = props;
-
+  const { city:newCity, setCity } = props;
+  const handleClick = () => {
+    setCity(newCity + 1)
+  }
   return (
-    <div>Drop</div>
+     <button onClick={handleClick}></button>
+    
   )
 }
 
