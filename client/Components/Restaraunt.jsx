@@ -1,12 +1,13 @@
 import React from 'react'
 
-export default Restaurant = () => {
-  
+export default Restaurant = (props) => {
+    const {}
     return (
-    <div className="RestarauntBox">
+    <div className="RestaurantBox">
       <h1>Restaurant Name</h1>
-      <h2>Rating</h2>
-      <h2>Cuisne</h2>
+      <h3>Address</h3>
+      <h3>Cuisne</h3>
+      <h3>Website</h3>
     </div>
   )
 }

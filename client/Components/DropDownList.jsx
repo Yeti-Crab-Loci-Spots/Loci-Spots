@@ -2,20 +2,35 @@ import React, {useState} from 'react'
 
 
 const DropDownList = (props) => {
-  const { city, setCity } = props;
-  const cityList = ['new york', 'toronto', 'omaha'];
+  /**
+   * @params = (city, setCity, cityList)
+   * @returns rendered dropdown list and modifies state on selection
+   */
+  /**
+   * Pull in props from Main Container
+   */
+  const { city, setCity, cityList } = props;
+  
+  /**
+   * Populate city elements array full of city option nodes
+   */
   const cityElements = [];
   cityList.forEach(city => {
-    cityElements.push(<option value={`${$city}`}>{`${city}`}</option>)
+    cityElements.push(<option key={`${city}`} value={`${city}`}>{`${city}`}</option>)
   });
+  /**
+   * Handle change function that sets the city state to selected
+   * city
+   */
   const handleChange = (event) => {
     setCity(event.target.value)
   }
+  
   return (
     <>
       <label>
-        Select your city
-        <select selectedCity={selectedCity} onChange={handleChange}>
+        Search By City
+        <select  onChange={handleChange}>
           {cityElements}
         </select>
       </label>

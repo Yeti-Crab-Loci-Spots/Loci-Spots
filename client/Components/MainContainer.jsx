@@ -1,18 +1,19 @@
-
 import React, { useState, useEffect } from "react";
+import RestaurantContainer from "./RestaurantContainer";
 
 import DropDownList from "./DropDownList";
 
 const MainContainer = () => {
     //main container will store the state of the drop down list and the state of the restaurant container which contains a list of the restaurants
-  const [city, setCity] = useState('new york')
+  const [city, setCity] = useState('New York')
   /**
    * List of city hooks
    */
   const [cities, setCities] = useState(['New York', 'Toronto', 'Omaha']);
     //each object will contain key value pair of the city and an array of restaurants
-  const [restaurants, setRestaurants] = useState({})
+  const [restaurantList, setRestaurants] = useState({})
   useEffect(() => {
+    console.log('in use effect,', city)
     try {
         (fetchCity = async () => {
           const response = await fetch(`/api/?city=${city}`)
@@ -23,16 +24,18 @@ const MainContainer = () => {
         console.log('City not Found!', error)
     }
     
-  }, [])
+  }, [city])
   return (
     <div>
 
       <div>MainContainer {city}</div>
     <div className="citySearch">
-        <DropDownList setCity={setCity} city ={city} />
+        <DropDownList setCity={setCity} city ={city} cityList = {cities} />
 
     </div>
-    <div className="restaurantContainer"></div>
+    <div className="restaurantContainer">
+        <RestaurantContainer restaurantList={restaurantList} />
+    </div>
     </div>
 
   )
