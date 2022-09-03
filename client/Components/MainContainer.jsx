@@ -11,20 +11,23 @@ const MainContainer = () => {
    */
   const [cities, setCities] = useState(['New York', 'Toronto', 'Omaha']);
     //each object will contain key value pair of the city and an array of restaurants
-  const [restaurantList, setRestaurants] = useState({})
-  useEffect(() => {
-    console.log('in use effect,', city)
-    try {
-        (fetchCity = async () => {
-          const response = await fetch(`/api/?city=${city}`)
-          const cityData = await response.json()
-          setRestaurants(cityData);
-        })();
-    } catch (error) {
-        console.log('City not Found!', error)
-    }
+  
+  // useEffect(() => {
+  //   console.log('in use effect,', city)
+  //   try {
+  //       (fetchCity = async () => {
+  //         const response = await fetch(`/api/?city=${city}`)
+  //         const cityData = await response.json()
+  //         setRestaurants(cityData);
+  //       })();
+  //   } catch (error) {
+  //       console.log('City not Found!', error)
+  //   }
     
-  }, [city])
+  // }, [city])
+  useEffect(() => {
+
+  },[city])
   return (
     <div>
 
@@ -33,7 +36,7 @@ const MainContainer = () => {
 
     </div>
     <div className="restaurantContainer">
-        <RestaurantContainer city={ city } restaurantList={restaurantList} />
+        <RestaurantContainer city={ city } />
     </div>
     </div>
 
