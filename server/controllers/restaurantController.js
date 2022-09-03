@@ -17,14 +17,18 @@ const restaurantController = {};
 
 // get all restaurants
 restaurantController.getRestaurants = async (req, res, next) => {
+  console.log('in get restaurants');
   try {
-    // TO DO: QUERY BY CITY ie. 'New York'
-    const queryString = `SELECT * FROM resto ORDER BY votes DESC`;
+    const { city } = req.params;
+    const queryString = `
+    SELECT * FROM resto 
+    WHERE city=$1
+    ORDER BY votes DESC`;
+    const params = [city];
 
-    const result = await db.query(queryString);
-    res.locals.restaurants = result.rows;
-    // TO DO: RETURN IN THIS FORMAT
-    // {cityName: [{restaurantName: 'TAO', rating: 5, cuisine: 'Chinese'}, {restaurantName: 'restaurant2', rating: 4, cuisine: 'Thai'}]}
+    const result = await db.query(queryString, params);
+    res.locals.restaurants = { [city]: result.rows };
+
     return next();
   } catch (err) {
     return next({
@@ -41,10 +45,12 @@ restaurantController.addRestaurant = async (req, res, next) => {
 
     const queryString = `
     INSERT INTO resto (restoName,address,city,foodType,link,votes)
-    VALUES ( '${name}', '${address}', '${city}', '${foodType}','${link}', 0);`;
+    VALUES ( $1, $2, $3, $4, $5, 0);`;
+    const params = [name, address, city, foodType, link];
 
-    const result = await db.query(queryString);
-    res.locals.addedRestaurant = result.rows;
+    const result = await db.query(queryString, params);
+    // console.log(result);
+    // res.locals.addedRestaurant = result;
     return next();
   } catch (err) {
     return next({
@@ -58,18 +64,20 @@ restaurantController.addRestaurant = async (req, res, next) => {
 restaurantController.updateRestaurant = async (req, res, next) => {
   try {
     const { resto_id, action } = req.body;
-    const operation = action === 'upvote' ? '+' : '-';
+    if (action === 'upvote') operation = '+';
+    if (action === 'downvote') operation = '-';
     const queryString = `
     UPDATE resto
     SET votes=votes${operation}1
-    WHERE resto_id=${resto_id}`;
+    WHERE resto_id=$1`;
+    const params = [resto_id];
 
-    const result = await db.query(queryString);
-    res.locals.restaurants = result.rows;
+    const result = await db.query(queryString, params);
+    // res.locals.updatedRestaurant = result.rows;
     return next();
   } catch (err) {
     return next({
-      log: 'Error in restaurantController.getRestaurants: ' + err,
+      log: 'Error in restaurantController.updateRestaurant: ' + err,
       message: { err: err },
     });
   }
@@ -79,10 +87,14 @@ restaurantController.updateRestaurant = async (req, res, next) => {
 restaurantController.deleteRestaurant = async (req, res, next) => {
   try {
     const { resto_id } = req.body;
-    const queryString = `DELETE FROM resto WHERE resto_id=${resto_id}`;
+    const queryString = `
+    DELETE FROM resto 
+    WHERE resto_id=$1`;
+    const params = [resto_id];
 
-    const result = await db.query(queryString);
-    res.locals.restaurants = result.rows;
+    const result = await db.query(queryString, params);
+    // console.log(result);
+    // res.locals.deletedRestaurant = result.rows;
     return next();
   } catch (err) {
     return next({
