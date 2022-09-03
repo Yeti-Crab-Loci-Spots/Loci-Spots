@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.scss";
-import MainContainer from './Components/MainContainer'
+import MainContainer from '../Components/MainContainer'
 
 
 const App = (props) => {
