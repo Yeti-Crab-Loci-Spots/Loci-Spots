@@ -4,7 +4,7 @@ const DropDownList = (props) => {
   const { citySearch:city } = props;
 
   return (
-    <div>DropDownList</div>
+    <div>Drop</div>
   )
 }
 
