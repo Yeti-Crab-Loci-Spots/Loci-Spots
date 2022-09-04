@@ -36,7 +36,7 @@ const MainContainer = () => {
 
     </div>
     <div className="restaurantContainer">
-        <RestaurantContainer city={ city } />
+        <RestaurantContainer city={ city } cityList={cities} setCity={setCity}/>
     </div>
     </div>
 

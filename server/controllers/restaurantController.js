@@ -40,7 +40,9 @@ restaurantController.getRestaurants = async (req, res, next) => {
 
 // add a restaurant
 restaurantController.addRestaurant = async (req, res, next) => {
+  console.log(req.body);
   try {
+    console.log('inside of addRestaurant');
     const { name, address, city, foodType, link } = req.body;
 
     const queryString = `

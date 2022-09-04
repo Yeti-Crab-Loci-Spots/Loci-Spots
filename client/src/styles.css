@@ -1,5 +1,14 @@
+ .modal {
+  position:fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+ }
  html {
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(127, 232, 255, 0.92);
   background-image:  url('https://ibb.co/SrLPW8M');
   background-repeat: no-repeat;
   background-attachment: fixed;
