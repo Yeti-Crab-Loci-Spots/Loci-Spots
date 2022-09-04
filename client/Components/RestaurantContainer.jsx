@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react'
+import AddRestaurant from './AddRestaurant';
 import Restaurant from './Restaurant'
 
 const RestaurantContainer = (props) => {
-    const {city} = props;
+    const {city, cityList, setCity} = props;
 //* Bring in the list of restaurants and update restaurant container
 //* loop through the list of restaurants and for each element make a restaurant div
   const [restaurantList, setRestaurants] = useState({})
   const [restoArray, setRestoArray] = useState([]);
   const [currentVote, setVote] = useState({ resto_id: 0, action: '' });
+//Declare a new state for our Add restaurant Modal
+  const [showModal, setModal] = useState(false)
   const fetchCity = async () => {
     const response = await fetch(`/api/${city}`)
     const cityData = await response.json()
     // setRestaurants(cityData);
-    console.log(cityData[city], 'in fetchcity')
+    // console.log(cityData[city], 'in fetchcity')
     const tmpArr = [];
     cityData[city].forEach((el, i) => {
       tmpArr.push(
@@ -34,8 +37,8 @@ const RestaurantContainer = (props) => {
   useEffect(() => {
     try {
       const updateVotes = async () => {
-        console.log(currentVote);
-        console.log('in update votes');
+        // console.log(currentVote);
+        // console.log('in update votes');
         const { resto_id, action } = currentVote;
         const response = await fetch('/api/',
           {
@@ -46,7 +49,7 @@ const RestaurantContainer = (props) => {
             }
           })
           fetchCity();
-        console.log(response);
+        // console.log(response);
       }
       updateVotes();
 
@@ -56,24 +59,15 @@ const RestaurantContainer = (props) => {
     }
   }, [currentVote])
 
-// console.log(restaurantList[city],'restaurantList')
-
-// const makeResto = () => {
-//     const restaurantArr = [];
-//     restaurantList[city].forEach((el) => {
-//     restaurantArr.push(
-//         <Restaurant restoObj={el}/>
-//     )
-// });
-
-
-
-  
+const handleRestaurantAdd = (e) => {
+  setModal(true)
+}
   return (
     <div>
       <div className='cityName'>{`${city}`}</div>
-      
-        <div className='restaurant'>{restoArray}</div>
+      <button type='button' onClick={handleRestaurantAdd}>Add Restaurant</button>
+      <div className='restaurant'>{restoArray}</div>
+      {showModal && <AddRestaurant cityList={cityList}  showModal={showModal} setModal={setModal} setCity={setCity}/>}
     </div>
   )
 }

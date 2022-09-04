@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.scss";
+import "./styles.css";
 import MainContainer from '../Components/MainContainer'
 
 
