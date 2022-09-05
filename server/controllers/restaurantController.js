@@ -89,6 +89,7 @@ restaurantController.updateRestaurant = async (req, res, next) => {
 restaurantController.deleteRestaurant = async (req, res, next) => {
   try {
     const { resto_id } = req.body;
+    console.log(req.body);
     const queryString = `
     DELETE FROM resto 
     WHERE resto_id=$1`;

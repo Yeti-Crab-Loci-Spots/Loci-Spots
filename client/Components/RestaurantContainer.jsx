@@ -9,7 +9,7 @@ const RestaurantContainer = (props) => {
   const [restaurantList, setRestaurants] = useState({});
   const [restoArray, setRestoArray] = useState([]);
   const [currentVote, setVote] = useState({ resto_id: 0, action: '' });
-
+  const [recentlyDeleted, setDeleted] = useState({resto_id: 0})
   //declare a reference to track whether a component has been mounted and initialize it to false
 
   const isMounted = useRef(false);
@@ -29,6 +29,7 @@ const RestaurantContainer = (props) => {
           currentVote={currentVote}
           key={i}
           restoObj={el}
+          setDeleted={setDeleted}
         />
       );
     });
@@ -74,6 +75,17 @@ const RestaurantContainer = (props) => {
   const handleRestaurantAdd = (e) => {
     setModal(true);
   };
+  /**
+   * state handling for refreshing page on delete
+   */
+  useEffect(() => {
+    try {
+      fetchCity();
+    } catch (error) {
+      console.log(`Error attempting to fetch city after delete, ${error}`)
+    }
+    
+  }, [recentlyDeleted])
   return (
     <div className='restaurantContainer'>
       <div className='cityName'>{`${city}`}</div>
