@@ -6,7 +6,7 @@ const AddRestaurant = (props) => {
   const [restaurantData, setNewRestaurant] = useState({
     name: '',
     address: '',
-    city: '',
+    city: 'New York',
     foodtype: '',
     link: '',
   });
