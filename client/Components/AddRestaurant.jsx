@@ -6,7 +6,7 @@ const AddRestaurant = (props) => {
   const [restaurantData, setNewRestaurant] = useState({
     name: '',
     address: '',
-    city: '',
+    city: 'New York',
     foodtype: '',
     link: '',
   });
@@ -94,7 +94,7 @@ const AddRestaurant = (props) => {
           <p>
             <label htmlFor='restaurant-foodtype'>Cuisine: </label>
             <input
-              name='foodtype'
+              name='foodType'
               type='text'
               placeholder='Cuisine'
               onChange={handleInputChange}

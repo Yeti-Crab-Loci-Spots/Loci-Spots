@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Restaurant = (props) => {
-  const { restoObj, setVote, currentVote } = props;
-  const { resto_id, restoname, address, city, foodtype, link, votes } =
+  const { restoObj, setVote, currentVote, setDeleted } = props;
+  const { resto_id, restoname, address, city, foodtype, link, votes,  } =
     restoObj;
   const handleUpVote = (e) => {
     // console.log('in handle up vote');
@@ -13,6 +13,25 @@ const Restaurant = (props) => {
   const handleDownVote = (e) => {
     setVote({ resto_id, action: 'downvote' });
   };
+  const handleDelete = (e) => {
+    (async () => {
+      try {
+        
+        await fetch('/api/', {
+          method: 'DELETE',
+          body: JSON.stringify({ resto_id }),
+          headers : {
+            'Content-Type' : 'application/json',
+          },
+        })
+        setDeleted({resto_id})
+        console.log(`Deleted ${restoname}`);
+      } catch (error) {
+        console.log(`Error attempting to delete ${restoname}, error`)
+      }
+      
+    })();
+  }
   return (
     <div className='restaurant-container'>
       <div className='voteSection'>
@@ -28,7 +47,7 @@ const Restaurant = (props) => {
         <p className='resto-name'>
           {restoname} <span className='cuisine'>[{foodtype}]</span>
         </p>
-        <button className='deleteBtn' onClick={() => handleDelete}>
+        <button className='deleteBtn' onClick={handleDelete}>
           Delete
         </button>
         <p className='info-text'>{address}</p>
