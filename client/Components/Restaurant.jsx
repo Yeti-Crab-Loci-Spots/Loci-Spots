@@ -1,34 +1,51 @@
-import React from 'react'
+import React from 'react';
 
 const Restaurant = (props) => {
-  const { restoObj, setVote, currentVote  } = props;
-  const {resto_id, restoname, address, city, foodtype, link, votes } = restoObj;
+  const { restoObj, setVote, currentVote } = props;
+  const { resto_id, restoname, address, city, foodtype, link, votes } =
+    restoObj;
   const handleUpVote = (e) => {
-    console.log('in handle up vote')
+    console.log('in handle up vote');
     console.log(resto_id, votes);
-    setVote({ resto_id: resto_id, action: 'upvote'})
+    setVote({ resto_id: resto_id, action: 'upvote' });
     // console.log(currentVote);
-  }
+  };
   const handleDownVote = (e) => {
-    
-    setVote({ resto_id, action: 'downvote'})
-
-  }
-    return (
-    <div className="RestaurantBox">
-      <h1>{restoname} <button className="delete" onClick={() => handleDelete}>Delete</button></h1>
-      <h3>{address}</h3>
-      <h3>{foodtype}</h3>
-      <h3>{link}</h3>
-      <h3>{votes}</h3>
-      <button className="upVote" onClick={handleUpVote}>up</button>
-      <button className="downVote" onClick={handleDownVote}>down</button>
+    setVote({ resto_id, action: 'downvote' });
+  };
+  return (
+    <div className='restaurant-container'>
+      <div className='voteSection'>
+        <button className='upVote voteBtn' onClick={handleUpVote}>
+          &#8679;
+        </button>
+        <p className='voteCount'>{votes}</p>
+        <button className='downVote voteBtn' onClick={handleDownVote}>
+          &#8681;
+        </button>
+      </div>
+      <div className='infoSection'>
+        <p className='resto-name'>
+          {restoname} <span className='cuisine'>[{foodtype}]</span>
+        </p>
+        <button className='deleteBtn' onClick={() => handleDelete}>
+          Delete
+        </button>
+        <p className='info-text'>{address}</p>
+        <p className='info-text'>
+          {link === '' ? (
+            'No link available'
+          ) : (
+            <a href={link}> Link to Restaurant</a>
+          )}
+        </p>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Restaurant
- 
+export default Restaurant;
+
 // resto_id SERIAL PRIMARY KEY,
 // restoName VARCHAR(50),
 // address VARCHAR(50),

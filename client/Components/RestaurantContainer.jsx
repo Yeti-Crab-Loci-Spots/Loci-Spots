@@ -1,79 +1,89 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import AddRestaurant from './AddRestaurant';
-import Restaurant from './Restaurant'
+import Restaurant from './Restaurant';
 
 const RestaurantContainer = (props) => {
-    const {city, cityList, setCity} = props;
-//* Bring in the list of restaurants and update restaurant container
-//* loop through the list of restaurants and for each element make a restaurant div
-  const [restaurantList, setRestaurants] = useState({})
+  const { city, cityList, setCity } = props;
+  //* Bring in the list of restaurants and update restaurant container
+  //* loop through the list of restaurants and for each element make a restaurant div
+  const [restaurantList, setRestaurants] = useState({});
   const [restoArray, setRestoArray] = useState([]);
   const [currentVote, setVote] = useState({ resto_id: 0, action: '' });
-//Declare a new state for our Add restaurant Modal
-  const [showModal, setModal] = useState(false)
+  //Declare a new state for our Add restaurant Modal
+  const [showModal, setModal] = useState(false);
   const fetchCity = async () => {
-    const response = await fetch(`/api/${city}`)
-    const cityData = await response.json()
+    const response = await fetch(`/api/${city}`);
+    const cityData = await response.json();
     // setRestaurants(cityData);
     // console.log(cityData[city], 'in fetchcity')
     const tmpArr = [];
     cityData[city].forEach((el, i) => {
       tmpArr.push(
-        <Restaurant setVote={setVote} currentVote={currentVote} key={i} restoObj={el} />
-      )
+        <Restaurant
+          setVote={setVote}
+          currentVote={currentVote}
+          key={i}
+          restoObj={el}
+        />
+      );
     });
     setRestoArray(tmpArr);
-  }  
- useEffect(() => {
+  };
+  useEffect(() => {
     // console.log('in use effect,', city)
     try {
-
-        fetchCity();
+      fetchCity();
     } catch (error) {
-        console.log('City not Found!', error)
+      console.log('City not Found!', error);
     }
-    
- }, [city])
+  }, [city]);
   useEffect(() => {
     try {
       const updateVotes = async () => {
         // console.log(currentVote);
         // console.log('in update votes');
         const { resto_id, action } = currentVote;
-        const response = await fetch('/api/',
-          {
-            method: 'PATCH',
-            body: JSON.stringify({ resto_id, action }),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          fetchCity();
+        const response = await fetch('/api/', {
+          method: 'PATCH',
+          body: JSON.stringify({ resto_id, action }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        fetchCity();
         // console.log(response);
-      }
+      };
       updateVotes();
 
       //run fetch city to re render
     } catch (error) {
-      console.log('Error in updateVotes,', error)
+      console.log('Error in updateVotes,', error);
     }
-  }, [currentVote])
+  }, [currentVote]);
 
-const handleRestaurantAdd = (e) => {
-  setModal(true)
-}
+  const handleRestaurantAdd = (e) => {
+    setModal(true);
+  };
   return (
-    <div>
+    <div className='restaurantContainer'>
       <div className='cityName'>{`${city}`}</div>
-      <button type='button' onClick={handleRestaurantAdd}>Add Restaurant</button>
-      <div className='restaurant'>{restoArray}</div>
-      {showModal && <AddRestaurant cityList={cityList}  showModal={showModal} setModal={setModal} setCity={setCity}/>}
+      <button type='button' onClick={handleRestaurantAdd}>
+        Add a New Restaurant
+      </button>
+      <div className='restaurantsList'>{restoArray}</div>
+      {showModal && (
+        <AddRestaurant
+          cityList={cityList}
+          showModal={showModal}
+          setModal={setModal}
+          setCity={setCity}
+        />
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default RestaurantContainer
-
+export default RestaurantContainer;
 
 /*
 {

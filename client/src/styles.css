@@ -1,21 +1,166 @@
- .modal {
-  position:fixed;
+/* Logo color #ffb33f */
+
+.modal {
+  position: absolute;
   background: white;
-  width: 80%;
+  /* width: 80%; */
   height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
- }
- html {
-  background-color: rgba(127, 232, 255, 0.92);
-  background-image:  url('https://ibb.co/SrLPW8M');
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 50px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  color: #563400;
+}
+
+html {
+  /* background-color: rgba(127, 232, 255, 0.92);
+  background-image: url('https://ibb.co/SrLPW8M');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: top 50px;
-  max-height: 100px;
+  max-height: 100px; */
   font-family: 'Josefin Sans', sans-serif;
-};
+}
+
+.nav {
+  background-color: #fff6e9;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  position: relative;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.logo {
+  align-self: center;
+  height: 80px;
+}
+
+.citySearch {
+  align-self: center;
+  position: absolute;
+  right: 10px;
+}
+
+label {
+  /* color: #ffb33f; */
+  font-weight: 700;
+}
+
+.dropdown {
+  margin-left: 10px;
+  /* margin-right: ; */
+}
+
+.restaurantContainer {
+  margin-top: 50px;
+  display: grid;
+  justify-items: center;
+}
+
+.cityName {
+  font-size: 60px;
+  font-weight: 900;
+  color: #ffb33f;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 5px 10px;
+  font-weight: 900;
+  background-color: white;
+  border: 1px solid #986211;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #ffb33f;
+}
+
+.restaurantsList {
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.restaurant-container {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+}
+
+.restaurant-container:hover {
+  background-color: #fff6e9;
+}
+
+.voteSection {
+  justify-self: center;
+}
+
+.voteCount {
+  text-align: center;
+  font-size: 20px;
+}
+
+.voteBtn {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 30px;
+}
+
+.upVote:hover {
+  color: green;
+}
+
+.downVote:hover {
+  color: red;
+}
+
+.infoSection {
+  position: relative;
+  padding: 0 10px;
+}
+
+.resto-name {
+  font-size: 36px;
+  font-weight: 700;
+  color: #ffb33f;
+  margin-bottom: 10px;
+}
+
+.cuisine {
+  font-size: 24px;
+}
+
+.info-text {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.deleteBtn {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
 
 /* h1 {
   color: rgba(255, 255, 255, 0.92);
@@ -23,15 +168,15 @@
   padding: 10px;
 } */
 
-.box {
-  max-width:500px;
+/* .box {
+  max-width: 500px;
   margin: 50px;
   background: white;
   border-radius: 5px;
   box-shadow: 5px 5px 15px -5px #000000;
-}
+} */
 
-#heading {
+/* #heading {
   background-color: #ffffff;
   text-align: center;
 }
@@ -40,7 +185,7 @@
   min-height: 70px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #F1F1F1;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 p {
@@ -49,7 +194,7 @@ p {
   font-size: 20px;
   font-weight: 200;
   color: #00204a;
-}
+}*/
 
 form.item {
   text-align: center;
@@ -61,4 +206,5 @@ footer {
   color: white;
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
+  margin: 20px auto;
 }
