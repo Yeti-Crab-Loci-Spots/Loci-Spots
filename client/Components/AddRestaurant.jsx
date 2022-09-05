@@ -13,8 +13,7 @@ const AddRestaurant = (props) => {
 
   const handleClose = (e) => {
     setModal(false);
-    console.log(e.target.value);
-    setCity(e.target.value);
+    setCity(restaurantData.city);
   };
   const cityElements = [];
   cityList.forEach((city) => {
