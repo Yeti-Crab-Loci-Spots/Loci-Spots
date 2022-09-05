@@ -129,15 +129,21 @@ button:hover {
 
 .upVote:hover {
   color: green;
+  background-color: #fff6e9;
 }
 
 .downVote:hover {
   color: red;
+  background-color: #fff6e9;
 }
 
 .infoSection {
   position: relative;
   padding: 0 10px;
+}
+
+a:hover {
+  color: #ffb33f;
 }
 
 .resto-name {
