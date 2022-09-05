@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AddRestaurant from './AddRestaurant';
 import Restaurant from './Restaurant';
 
@@ -9,13 +9,18 @@ const RestaurantContainer = (props) => {
   const [restaurantList, setRestaurants] = useState({});
   const [restoArray, setRestoArray] = useState([]);
   const [currentVote, setVote] = useState({ resto_id: 0, action: '' });
+
+  //declare a reference to track whether a component has been mounted and initialize it to false
+
+  const isMounted = useRef(false);
+
   //Declare a new state for our Add restaurant Modal
   const [showModal, setModal] = useState(false);
   const fetchCity = async () => {
     const response = await fetch(`/api/${city}`);
     const cityData = await response.json();
     // setRestaurants(cityData);
-    // console.log(cityData[city], 'in fetchcity')
+    console.log(cityData[city], 'in fetchcity')
     const tmpArr = [];
     cityData[city].forEach((el, i) => {
       tmpArr.push(
@@ -30,7 +35,7 @@ const RestaurantContainer = (props) => {
     setRestoArray(tmpArr);
   };
   useEffect(() => {
-    // console.log('in use effect,', city)
+    // console.log(isMounted.current)
     try {
       fetchCity();
     } catch (error) {
@@ -38,27 +43,32 @@ const RestaurantContainer = (props) => {
     }
   }, [city]);
   useEffect(() => {
-    try {
-      const updateVotes = async () => {
-        // console.log(currentVote);
-        // console.log('in update votes');
-        const { resto_id, action } = currentVote;
-        const response = await fetch('/api/', {
-          method: 'PATCH',
-          body: JSON.stringify({ resto_id, action }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        fetchCity();
-        // console.log(response);
-      };
-      updateVotes();
-
-      //run fetch city to re render
-    } catch (error) {
-      console.log('Error in updateVotes,', error);
+    if(isMounted.current) {
+      try {
+        const updateVotes = async () => {
+          console.log(currentVote);
+          // console.log('in update votes');
+          const { resto_id, action } = currentVote;
+          const response = await fetch('/api/', {
+            method: 'PATCH',
+            body: JSON.stringify({ resto_id, action }),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          fetchCity();
+          console.log(response);
+        };
+        updateVotes();
+  
+        //run fetch city to re render
+      } catch (error) {
+        console.log('Error in updateVotes,', error);
+      }
+    } else {
+      isMounted.current = true
     }
+
   }, [currentVote]);
 
   const handleRestaurantAdd = (e) => {
