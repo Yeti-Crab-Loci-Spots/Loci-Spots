@@ -5,8 +5,8 @@ const Restaurant = (props) => {
   const { resto_id, restoname, address, city, foodtype, link, votes } =
     restoObj;
   const handleUpVote = (e) => {
-    console.log('in handle up vote');
-    console.log(resto_id, votes);
+    // console.log('in handle up vote');
+    // console.log(resto_id, votes);
     setVote({ resto_id: resto_id, action: 'upvote' });
     // console.log(currentVote);
   };
