@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-
+import React, { useState } from 'react';
 
 const DropDownList = (props) => {
   /**
@@ -10,33 +9,34 @@ const DropDownList = (props) => {
    * Pull in props from Main Container
    */
   const { city, setCity, cityList } = props;
-  
+
   /**
    * Populate city elements array full of city option nodes
    */
   const cityElements = [];
-  cityList.forEach(city => {
-    cityElements.push(<option key={`${city}`} value={`${city}`}>{`${city}`}</option>)
+  cityList.forEach((city) => {
+    cityElements.push(
+      <option key={`${city}`} value={`${city}`}>{`${city}`}</option>
+    );
   });
   /**
    * Handle change function that sets the city state to selected
    * city
    */
   const handleChange = (event) => {
-    setCity(event.target.value)
-  }
-  
+    setCity(event.target.value);
+  };
+
   return (
     <>
       <label>
-        Search By City
-        <select  onChange={handleChange}>
+        Select a City: <br></br>
+        <select className='dropdown' onChange={handleChange}>
           {cityElements}
         </select>
       </label>
     </>
+  );
+};
 
-  )
-}
-
-export default DropDownList
+export default DropDownList;
