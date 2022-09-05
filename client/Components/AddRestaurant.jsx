@@ -13,7 +13,6 @@ const AddRestaurant = (props) => {
 
   const handleClose = (e) => {
     setModal(false);
-    console.log('in close modal', restaurantData.city);
     setCity(restaurantData.city);
   };
   const cityElements = [];
