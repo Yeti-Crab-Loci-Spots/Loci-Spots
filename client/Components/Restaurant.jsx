@@ -50,7 +50,7 @@ const Restaurant = (props) => {
         </button>
         <p className='info-text'>{address}</p>
         <p className='info-text'>
-          {link === '' || link === null ? (
+          {!link ? (
             'No link available'
           ) : (
             <a
