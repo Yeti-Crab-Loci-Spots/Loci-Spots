@@ -7,7 +7,15 @@ const restaurantController = require('../controllers/restaurantController');
  */
 
 /**
- * GET REQUESTS, return list of restaurants by city
+ * GET REQUEST, return list of all cities
+ */
+ router.get('/', restaurantController.getCities, (req, res) => {
+  console.log('getCities: Success!!!');
+  res.status(200).json(res.locals.cities);
+});
+
+/**
+ * GET REQUEST, return list of all restaurants for a provided city
  */
 router.get('/:city', restaurantController.getRestaurants, (req, res) => {
   console.log('getResto: Success!!!');
@@ -21,8 +29,15 @@ router.post('/', restaurantController.addRestaurant, (req, res) => {
   console.log('postResto: Success!!!');
   res.status(200).send('Restaurant successfully added!');
 });
-
 /**
+ * Create new city
+ */
+// router.post('/addCity', restaurantController.addCity, (req, res) => {
+//   console.log('postCity: Success');
+//   res.status(200).send('New City successfully added!');
+//  })
+/**
+ * 
  * PATCH REQUESTS, update votecount for a given resto_id
  */
 router.patch('/', restaurantController.updateRestaurant, (req, res) => {

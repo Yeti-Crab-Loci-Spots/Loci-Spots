@@ -15,6 +15,31 @@ CREATE TABLE resto (
 // Restaurant Controller
 const restaurantController = {};
 
+// get all cities
+restaurantController.getCities = async (req, res, next) => {
+  console.log('in get cities');
+  try {
+    const { city } = req.params;
+    const queryString = `
+    SELECT city FROM resto 
+    GROUP BY city`;
+
+    const result = await db.query(queryString);
+    const cities = [];
+    result.rows.forEach(el => {
+      cities.push(el.city);
+    })
+    res.locals.cities = cities;
+
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Error in restaurantController.getRestaurants: ' + err,
+      message: { err: err },
+    });
+  }
+};
+
 // get all restaurants
 restaurantController.getRestaurants = async (req, res, next) => {
   console.log('in get restaurants');
@@ -106,5 +131,11 @@ restaurantController.deleteRestaurant = async (req, res, next) => {
     });
   }
 };
-
+// restaurantController.addRestaurant = async (req, res, next) => {
+//   try {
+    
+//   } catch (error) {
+    
+//   }
+// }
 module.exports = restaurantController;
