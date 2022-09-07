@@ -2,8 +2,13 @@ import React from 'react';
 
 const Restaurant = (props) => {
   const { restoObj, setVote, currentVote, setDeleted } = props;
-  const { resto_id, restoname, address, city, foodtype, link, votes } =
-    restoObj;
+  const { resto_id, restoname, address, city, foodtype, link, votes } = restoObj;
+
+  // console.log("restobject: ",restoObj)
+  // console.log("setVote: ",setVote)
+  // console.log("currentVote: ",currentVote)
+  // console.log("setDeleted: ",setDeleted)
+
   const handleUpVote = (e) => {
     // console.log('in handle up vote');
     // console.log(resto_id, votes);
