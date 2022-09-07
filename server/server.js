@@ -2,6 +2,8 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const apiRouter = require("./routes/api");
+const passport = require('passport');
+require('./routes/passport') // MLCK?
 
 const PORT = 3000;
 
