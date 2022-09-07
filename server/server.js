@@ -4,6 +4,7 @@ const app = express();
 const restoApiRouter = require("./routes/restoApi");
 const cookieSession = require('cookie-session')
 const passport = require('passport');
+const { user } = require("pg/lib/defaults");
 require('./routes/passport') // MLCK?
 
 const PORT = 3000;
@@ -47,6 +48,16 @@ app.get('/auth/github', passport.authenticate('github',{ scope: [ 'user' ] }));
 app.get('/auth/github/callback', passport.authenticate('github'),
 function(req, res) {
   res.redirect('/auth/success')
+});
+
+const isLoggedIn = (req, res, next ) => {
+  if(!req.user){
+    return res.status(401).json("Error: User not authorized");
+  }
+  return next();
+}
+app.get('/auth', isLoggedIn, (req, res) => {
+  res.status(200).json({userId: req.user});
 });
 
 
