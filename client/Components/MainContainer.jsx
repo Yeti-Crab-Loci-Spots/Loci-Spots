@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import RestaurantContainer from './RestaurantContainer';
 import Logo from '../src/media/LociSpotLogo.png';
+import { Link } from 'react-router-dom';
 
 import DropDownList from './DropDownList';
 
@@ -13,6 +14,7 @@ const MainContainer = () => {
   const [cities, setCities] = useState(['New York', 'Toronto', 'Omaha']);
   //each object will contain key value pair of the city and an array of restaurants
 
+
   useEffect(() => {}, [city]);
   return (
     <div>
@@ -22,9 +24,23 @@ const MainContainer = () => {
           <span className='citySearch'>
             <DropDownList setCity={setCity} city={city} cityList={cities} />
           </span>
-        </div>
-      </div>
+          <span className ="loginsignup">
 
+            {/*if user is not logged in, show these buttons, else show "XYZ is logged in and a logout button"  */}
+        <Link to ='/signup'>
+          <button className='Signup'>
+          Signup
+        </button>
+        </Link>
+        <Link to = '/login'>
+        <button className='login'>
+          Login
+        </button>
+        </Link>
+          </span>
+        </div>
+        
+      </div>
       <div>
         <RestaurantContainer city={city} cityList={cities} setCity={setCity} />
       </div>
@@ -33,19 +49,3 @@ const MainContainer = () => {
 };
 
 export default MainContainer;
-
-// {cityName: [{restaurantName: 'TAO', votes: 5, cuisine: 'Chinese'}, {restaurantName: 'restaurant2', rating: 4, cuisine: 'Thai'}]}
-/**
- * //Action body from front end to upvote or down vote restaurant
- * const { resto_id, action } = req.body;
- * CREATE TABLE resto (
-  resto_id SERIAL PRIMARY KEY,
-  restoName VARCHAR(50),
-  address VARCHAR(50),
-  city VARCHAR(50),
-  foodType VARCHAR(50),
-  link VARCHAR(300),
-  votes INTEGER
-);
- * 
- */
