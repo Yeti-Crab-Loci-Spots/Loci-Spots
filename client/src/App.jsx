@@ -1,23 +1,21 @@
-import React from "react";
-import "./styles.css";
+import React, { Fragment } from 'react';
+import './styles.css';
 import MainContainer from '../Components/MainContainer'
-import LoginPage from "../Pages/LoginPage";
-import { Box } from '@mui/material';
+import LoginPage from '../Pages/LoginPage';
+import { Routes, Route, Navigate } from 'react-router-dom'
 
 
 const App = (props) => {
-  // const fetchAccounts = () => {
-  //   fetch('/api')
-  //   // .then((res) => res.json())
-  //   .then((data) => {
-  //     console.log(data);
-  //   })
-  // }
-  // fetchAccounts()
+  const user = false;
+
   return (
-    <Box>
-      <LoginPage />
-    </Box>
+    <div>
+      <Routes>
+        <Route 
+          path="/" 
+          element={user ? <MainContainer /> : <LoginPage />}/>
+      </Routes>
+    </div>
   );
 };
 
