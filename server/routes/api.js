@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const restaurantController = require('../controllers/restaurantController');
+const userController = require('../controllers/userController');
 
 /**
  * Import Controllers
@@ -17,10 +18,17 @@ router.get('/:city', restaurantController.getRestaurants, (req, res) => {
 /**
  * POST REQUESTS, create a new restaruant to LociDB
  */
+ router.post('/signup', userController.addUser, (req, res) => {
+  console.log('addUser: Success!!!');
+  res.status(200).send('User successfully added!').redirect('/login');
+});
+
 router.post('/', restaurantController.addRestaurant, (req, res) => {
   console.log('postResto: Success!!!');
   res.status(200).send('Restaurant successfully added!');
 });
+
+
 
 /**
  * PATCH REQUESTS, update votecount for a given resto_id
