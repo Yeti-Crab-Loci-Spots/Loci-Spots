@@ -38,7 +38,7 @@ const AddRestaurant = (props) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(restaurantData),
     };
-    fetch('/api', restaurantObj)
+    fetch('/api/resto', restaurantObj)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((err) =>

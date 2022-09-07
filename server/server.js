@@ -1,7 +1,8 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const apiRouter = require("./routes/api");
+const restoApiRouter = require("./routes/restoApi");
+const cookieSession = require('cookie-session')
 const passport = require('passport');
 require('./routes/passport') // MLCK?
 
@@ -27,8 +28,29 @@ if (process.env.NODE_ENV === "production") {
 /**
  * define route handlers
  */
+ 
+ app.use(cookieSession({
+  name: 'github-auth-session',
+  keys: ['key1', 'key2']
+}))
 
-app.use("/api", apiRouter);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/success', (req,res)=>{
+  res.send(`Hello world ${req.user}`)
+  });
+
+app.get('/auth/error', (req, res) => res.send('Unknown Error'));
+
+app.get('/auth/github', passport.authenticate('github',{ scope: [ 'user' ] }));
+app.get('/auth/github/callback', passport.authenticate('github'),
+function(req, res) {
+  res.redirect('/auth/success')
+});
+
+
+app.use("/api/resto", restoApiRouter);
 
 /**
  * catch-all for unknown routes
@@ -43,6 +65,8 @@ app.use((req, res) => {
  */
 
 app.use((err, req, res, next) => {
+  console.log(req.protocol + '://' + req.get('host') + req.originalUrl);
+  console.log(err);
   const defaultErr = {
     log: "Express error handler caught unknown middleware error",
     status: 500,
