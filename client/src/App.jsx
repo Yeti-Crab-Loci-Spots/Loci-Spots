@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.css";
 import MainContainer from '../Components/MainContainer'
 import LoginPage from "../Pages/LoginPage";
+import { Box } from '@mui/material';
 
 
 const App = (props) => {
@@ -14,9 +15,9 @@ const App = (props) => {
   // }
   // fetchAccounts()
   return (
-    <>
+    <Box>
       <LoginPage />
-    </>
+    </Box>
   );
 };
 
