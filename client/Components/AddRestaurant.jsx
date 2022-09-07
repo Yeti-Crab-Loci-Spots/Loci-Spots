@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddRestaurant = (props) => {
   const { setModal, showModal, cityList, setCity } = props;
 
   const [restaurantData, setNewRestaurant] = useState({
-    name: '',
-    address: '',
-    city: 'New York',
-    foodtype: '',
-    link: '',
+    name: "",
+    address: "",
+    city: "New York",
+    foodtype: "",
+    link: "",
   });
 
   const handleClose = (e) => {
@@ -29,20 +29,20 @@ const AddRestaurant = (props) => {
       ...restaurantData,
       [name]: value,
     });
-    console.log(restaurantData);
+    console.log("I am RESTUARANT DATA", restaurantData);
   };
   const handleSubmit = async (e) => {
     console.log(restaurantData);
     const restaurantObj = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(restaurantData),
     };
-    fetch('/api', restaurantObj)
+    fetch("/api", restaurantObj)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((err) =>
-        console.log('Error in submitting a new restaurant,', err)
+        console.log("Error in submitting a new restaurant,", err)
       );
     // try {
     //   const restaurantObj = {
@@ -59,55 +59,55 @@ const AddRestaurant = (props) => {
     // setModal(false);
   };
   return (
-    <div className='modal'>
+    <div className="modal">
       <section>
-        <p className='resto-name'>Add a Restaurant</p>
+        <p className="resto-name">Add a Restaurant</p>
         <form>
           <p>
-            <label htmlFor='restaurant-name'>Restaurant Name: </label>
+            <label htmlFor="restaurant-name">Restaurant Name: </label>
             <input
-              type='text'
-              name='name'
-              placeholder='Restaurant Name'
+              type="text"
+              name="name"
+              placeholder="Restaurant Name"
               onChange={handleInputChange}
             />
           </p>
           <p>
-            <label htmlFor='restaurant-address'>Restaurant Address: </label>
+            <label htmlFor="restaurant-address">Restaurant Address: </label>
             <input
-              name='address'
-              type='text'
-              placeholder='Restaurant Address'
+              name="address"
+              type="text"
+              placeholder="Restaurant Address"
               onChange={handleInputChange}
             />
           </p>
           <p>
-            <label htmlFor='restaurant-link'>Restaurant Link: </label>
+            <label htmlFor="restaurant-link">Restaurant Link: </label>
             <input
-              name='link'
-              type='text'
-              placeholder='Restaurant Link'
+              name="link"
+              type="text"
+              placeholder="Restaurant Link"
               onChange={handleInputChange}
             />
           </p>
           <p>
-            <label htmlFor='restaurant-foodtype'>Cuisine: </label>
+            <label htmlFor="restaurant-foodtype">Cuisine: </label>
             <input
-              name='foodType'
-              type='text'
-              placeholder='Cuisine'
+              name="foodType"
+              type="text"
+              placeholder="Cuisine"
               onChange={handleInputChange}
             />
           </p>
-          <label htmlFor='restaurant-city'>
+          <label htmlFor="restaurant-city">
             Add to City:
-            <select name='city' onChange={handleInputChange}>
+            <select name="city" onChange={handleInputChange}>
               {cityElements}
             </select>
           </label>
           <br></br>
           <br></br>
-          <button type='submit' onClick={handleSubmit}>
+          <button type="submit" onClick={handleSubmit}>
             Submit
           </button>
           <button onClick={handleClose}>Close</button>
