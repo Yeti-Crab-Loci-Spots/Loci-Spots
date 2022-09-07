@@ -60,9 +60,9 @@ restaurantController.addRestaurant = async (req, res, next) => {
     const { name, address, city, foodType, link } = req.body;
 
     const queryString = `
-    INSERT INTO resto (restoName,address,city,foodType,link,votes)
-    VALUES ( $1, $2, $3, $4, $5, 0);`;
-    const params = [name, address, city, foodType, link];
+    INSERT INTO resto (restoName,address,city,foodType,link, add_by_user)
+    VALUES ( $1, $2, $3, $4, $5, $6);`;
+    const params = [name, address, city, foodType, link, req.user];
 
     const result = await db.query(queryString, params);
     // console.log(result);
@@ -107,30 +107,28 @@ restaurantController.addRestaurant = async (req, res, next) => {
 
 // update (votes) for a restaurant
 // Hina Update
-restaurantController.updateRestaurant = async (req, res, next) => {
-  try {
-    // in req.body, include the user_id
-    const { resto_id, action } = req.body;
-    // check to see if the user (user_id) activity on the restaurant (resto_id)
-    if (action === 'upvote') votes = 1;
-    if (action === 'downvote') votes = -1;
-    const params = [resto_id, 'testing', votes]
-    const queryString = `
-    INSERT INTO uservotes(resto_id, user_id, votes)
-    VALUES($1, $2, $3)
-    ON CONFLICT (resto_id, user_id) 
-    DO UPDATE SET votes = $3
-    WHERE uservotes.resto_id=$1 AND uservotes.user_id=$2
-    `
-    await db.query(queryString, params);
-    return next();
-  } catch (err) {
-    return next({
-      log: 'Error in restaurantController.updateRestaurant: ' + err,
-      message: { err: err },
-    });
-  }
-};
+// restaurantController.updateRestaurant = async (req, res, next) => {
+//   try {
+//     const { resto_id, action } = req.body;
+//     if (action === 'upvote') votes = 1;
+//     if (action === 'downvote') votes = -1;
+//     const params = [resto_id, 'testing', votes]
+//     const queryString = `
+//     INSERT INTO uservotes(resto_id, user_id, votes)
+//     VALUES($1, $2, $3)
+//     ON CONFLICT (resto_id, user_id) 
+//     DO UPDATE SET votes = $3
+//     WHERE uservotes.resto_id=$1 AND uservotes.user_id=$2
+//     `
+//     await db.query(queryString, params);
+//     return next();
+//   } catch (err) {
+//     return next({
+//       log: 'Error in restaurantController.updateRestaurant: ' + err,
+//       message: { err: err },
+//     });
+//   }
+// };
 
 
 // delete a restaurant

@@ -26,7 +26,7 @@ router.post('/', restaurantController.addRestaurant, (req, res) => {
 /**
  * PATCH REQUESTS, update votecount for a given resto_id
  */
-router.patch('/', restaurantController.updateRestaurant, (req, res) => {
+router.patch('/', userVotesController.getVotes, (req, res) => {
   // console.log('--->', req.body);
   res.status(200).send('Restaurant vote registered!');
 });
@@ -38,5 +38,8 @@ router.delete('/', restaurantController.deleteRestaurant, (req, res) => {
   // console.log('deleteResto: Success!!!');
   res.status(200).send('Restaurant successfully deleted!');
 });
+
+
+
 
 module.exports = router;
