@@ -21,7 +21,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
   try {
     const { city } = req.params;
     const queryString = `
-    SELECT * FROM resto 
+    SELECT * FROM restos 
     WHERE city=$1
     ORDER BY votes DESC`;
     const params = [city];
@@ -46,7 +46,7 @@ restaurantController.addRestaurant = async (req, res, next) => {
     const { name, address, city, foodType, link } = req.body;
 
     const queryString = `
-    INSERT INTO resto (restoName,address,city,foodType,link,votes)
+    INSERT INTO restos (restoName,address,city,foodType,link,votes)
     VALUES ( $1, $2, $3, $4, $5, 0);`;
     const params = [name, address, city, foodType, link];
 
@@ -69,7 +69,7 @@ restaurantController.updateRestaurant = async (req, res, next) => {
     if (action === 'upvote') operation = '+';
     if (action === 'downvote') operation = '-';
     const queryString = `
-    UPDATE resto
+    UPDATE restos
     SET votes=votes${operation}1
     WHERE resto_id=$1`;
     const params = [resto_id];
@@ -91,7 +91,7 @@ restaurantController.deleteRestaurant = async (req, res, next) => {
     const { resto_id } = req.body;
     console.log(req.body);
     const queryString = `
-    DELETE FROM resto 
+    DELETE FROM restos 
     WHERE resto_id=$1`;
     const params = [resto_id];
 

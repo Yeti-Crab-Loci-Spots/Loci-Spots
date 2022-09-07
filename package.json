@@ -43,6 +43,7 @@
     "@mui/base": "^5.0.0-alpha.95",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.3",
+    "axios": "^0.27.2",
     "express": "^4.18.1",
     "fontsource-roboto": "^4.0.0",
     "node-fetch": "^2.6.7",
@@ -50,6 +51,8 @@
     "pg": "^8.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0",
     "save": "^2.5.0"
   },
   "nodemonconfig": {

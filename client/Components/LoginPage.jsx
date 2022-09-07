@@ -1,38 +1,36 @@
-import React, { useState } from 'react';
+import React, {useState} from "react";
+import { Link } from 'react-router-dom';
+import LoginForm from "./LoginForm";
 
-function LoginForm({login, error}){
-    const [details, setDetails] = useState({
-        name: '',
-        username: '',
-        password: ''
-    });
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-    const submitHandler = e =>{
-        e.preventDefault();
+const LoginPage = () =>{
 
-        login(details);
+    const [user, setUser] = useState({name:'', username:''});
+    const [error, setError] = useState('');
+
+    const login = (details) => {
+        console.log(details);
+        //see if username and password combo are in the database
+        //if(axios.get('/username') ?)
+        setUser({
+            name: details.name,
+            username: details.username
+        })
     }
 
+   
+
+
+
     return (
-        <form onSubmit = {submitHandler}>
-            <div className = "form-inner">
-                {/* <h2>Login</h2>
-                <div className = "form-group">
-                    <label htmlFor ="name">Name:</label>
-                    <input type = "text" name ="name" id ="name" onChange = {e => setDetails({...details, name: e.target.value})} value = {details.name} />
-                </div> */}
-                <div className = "form-group">
-                    <label htmlFor ="username">Username:</label>
-                    <input type = "text" name ="username" id ="username" onChange = {e => setDetails({...details, username: e.target.value})} value = {details.username} />
-                </div>
-                <div className="formgroup">
-                    <label htmlFor = "password">Password:</label>
-                    <input type = "password" name ="password" id ="password" onChange = {e => setDetails({...details, password: e.target.value})} value = {details.password}/>
-                </div>
-                <input type="submit" value="Login" />
-            </div>
-        </form>
-    )
+        <div>
+            <Link to ='/'>
+                <button className = "back">Back</button>
+            </Link>
+            <LoginForm login = {login} error = {error} />
+        </div>
+    );
 }
 
-export default LoginForm;
+export default LoginPage;
