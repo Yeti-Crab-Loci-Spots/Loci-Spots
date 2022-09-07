@@ -8,6 +8,7 @@ require('./routes/passport') // MLCK?
 
 const PORT = 3000;
 
+
 /**
  * Handle parsing request body
  */
@@ -46,8 +47,9 @@ app.get('/auth/error', (req, res) => res.send('Unknown Error'));
 app.get('/auth/github', passport.authenticate('github',{ scope: [ 'user' ] }));
 app.get('/auth/github/callback', passport.authenticate('github'),
 function(req, res) {
-  res.redirect('/auth/success')
+  res.redirect('/')
 });
+
 
 
 app.use("/api/resto", restoApiRouter);
