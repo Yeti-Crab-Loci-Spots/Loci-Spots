@@ -17,7 +17,7 @@ const RestaurantContainer = (props) => {
   //Declare a new state for our Add restaurant Modal
   const [showModal, setModal] = useState(false);
   const fetchCity = async () => {
-    const response = await fetch(`/api/${city}`);
+    const response = await fetch(`/api/resto/${city}`);
     const cityData = await response.json();
     // setRestaurants(cityData);
     console.log(cityData[city], 'in fetchcity')
@@ -50,7 +50,7 @@ const RestaurantContainer = (props) => {
           console.log(currentVote);
           // console.log('in update votes');
           const { resto_id, action } = currentVote;
-          const response = await fetch('/api/', {
+          const response = await fetch('/api/resto/', {
             method: 'PATCH',
             body: JSON.stringify({ resto_id, action }),
             headers: {
