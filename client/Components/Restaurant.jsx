@@ -21,7 +21,7 @@ const Restaurant = (props) => {
   const handleDelete = (e) => {
     (async () => {
       try {
-        await fetch('/api/', {
+        await fetch('/api/resto/', {
           method: 'DELETE',
           body: JSON.stringify({ resto_id }),
           headers: {
