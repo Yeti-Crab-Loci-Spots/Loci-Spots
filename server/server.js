@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const app = express();
-const apiRouter = require("./routes/api");
+const restoApiRouter = require("./routes/restoApi");
 
 const PORT = 3000;
 
@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "production") {
  * define route handlers
  */
 
-app.use("/api", apiRouter);
+app.use("/api/resto", restoApiRouter);
 
 /**
  * catch-all for unknown routes
