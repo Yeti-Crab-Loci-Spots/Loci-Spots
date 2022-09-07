@@ -14,13 +14,6 @@ const MainContainer = () => {
   const [cities, setCities] = useState(['New York', 'Toronto', 'Omaha']);
   //each object will contain key value pair of the city and an array of restaurants
 
-  const logout = (details) =>{
-    console.log('logout');
-    setUser({
-        name: '',
-        username: ''
-    })
-}
 
   useEffect(() => {}, [city]);
   return (
