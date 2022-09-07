@@ -20,7 +20,6 @@ CREATE TABLE resto (
 	"city" varchar,
 	"foodtype" varchar,
 	"link" varchar,
-	"votes" integer,
   "add_by_user" integer,
 
 	CONSTRAINT "resto_pkey" PRIMARY KEY ("resto_id")
@@ -41,7 +40,6 @@ CREATE TABLE user (
 
 
 CREATE TABLE  public.user_resto_votes (
-	"_id" serial NOT NULL,
 	"user_id" integer NOT NULL,
 	"resto_id" integer NOT NULL,
   "vote" integer,
@@ -64,13 +62,13 @@ ALTER TABLE  public.user_resto_votes ADD CONSTRAINT "votes_fk1" FOREIGN KEY ("re
  INSERT INTO public.user VALUES (3, 'crgb0s');
 
 
- INSERT INTO public.resto VALUES (1, 'Jade Garden', '211 Main St', 'New York', 'Chinese', 'www.google.com', 0, 1);
- INSERT INTO public.resto VALUES (2, 'Hot Dougs', '21 Archer St', 'Toronto', 'Sandwich', 'www.google.com', 0, 1);
+ INSERT INTO public.resto VALUES (1, 'Jade Garden', '211 Main St', 'New York', 'Chinese', 'www.google.com', 1);
+ INSERT INTO public.resto VALUES (2, 'Hot Dougs', '21 Archer St', 'Toronto', 'Sandwich', 'www.google.com', 1);
  
 
- INSERT INTO public.user_resto_votes VALUES (1, 1, 1, 1);
- INSERT INTO public.user_resto_votes VALUES (2, 1, 2, -1);
- INSERT INTO public.user_resto_votes VALUES (3, 2, 1, 1);
+ INSERT INTO public.user_resto_votes VALUES (1, 1, 1);
+ INSERT INTO public.user_resto_votes VALUES (1, 2, -1);
+ INSERT INTO public.user_resto_votes VALUES (2, 1, 1);
 
 select setval('user_resto_votes__id_seq', 4, false);
 
