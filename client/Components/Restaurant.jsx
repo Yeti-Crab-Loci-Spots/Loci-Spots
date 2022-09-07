@@ -4,6 +4,9 @@ const Restaurant = (props) => {
   const { restoObj, setVote, currentVote, setDeleted } = props;
   const { resto_id, restoname, address, city, foodtype, link, votes } =
     restoObj;
+
+
+
   const handleUpVote = (e) => {
     // console.log('in handle up vote');
     // console.log(resto_id, votes);
@@ -13,6 +16,8 @@ const Restaurant = (props) => {
   const handleDownVote = (e) => {
     setVote({ resto_id, action: 'downvote' });
   };
+
+
   const handleDelete = (e) => {
     (async () => {
       try {
