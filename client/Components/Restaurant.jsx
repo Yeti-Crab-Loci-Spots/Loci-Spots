@@ -2,10 +2,19 @@ import React from 'react';
 
 const Restaurant = (props) => {
   const { restoObj, setVote, currentVote, setDeleted } = props;
+<<<<<<< HEAD
   const { resto_id, restoname, address, city, foodtype, link, votes } =
     restoObj;
 
 
+=======
+  const { resto_id, restoname, address, city, foodtype, link, votes } = restoObj;
+
+  // console.log("restobject: ",restoObj)
+  // console.log("setVote: ",setVote)
+  // console.log("currentVote: ",currentVote)
+  // console.log("setDeleted: ",setDeleted)
+>>>>>>> dev
 
   const handleUpVote = (e) => {
     // console.log('in handle up vote');
@@ -21,7 +30,7 @@ const Restaurant = (props) => {
   const handleDelete = (e) => {
     (async () => {
       try {
-        await fetch('/api/', {
+        await fetch('/api/resto/', {
           method: 'DELETE',
           body: JSON.stringify({ resto_id }),
           headers: {

@@ -18,6 +18,7 @@ const config = {
     // port: 3000,
     proxy: {
       "/api": "http://localhost:3000",
+      "/auth": "http://localhost:3000"
     },
   },
   module: {

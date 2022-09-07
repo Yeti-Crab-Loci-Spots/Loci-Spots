@@ -10,16 +10,29 @@ const RestaurantContainer = (props) => {
   const [restoArray, setRestoArray] = useState([]);
   const [currentVote, setVote] = useState({ resto_id: 0, action: '' });
   const [recentlyDeleted, setDeleted] = useState({resto_id: 0})
-  //declare a reference to track whether a component has been mounted and initialize it to false
 
+  //declare a reference to track whether a component has been mounted and initialize it to false
   const isMounted = useRef(false);
 
   //Declare a new state for our Add restaurant Modal
   const [showModal, setModal] = useState(false);
   const fetchCity = async () => {
-    const response = await fetch(`/api/${city}`);
+    const response = await fetch(`/api/resto/${city}`);
     const cityData = await response.json();
-    // setRestaurants(cityData);
+    // pulling from an api that returns an array filled with objects, returns dependant on city on line 20
+    /* 
+    at array element 0
+
+    address: "123 main"
+    city: "New York"
+    foodtype: "chinese"
+    link: "google.com"
+    resto_id: 73
+    restoname: "Checking"
+    votes: 61
+
+    cityData[city][0].foodtype => "chinese"
+    */
     console.log(cityData[city], 'in fetchcity')
     const tmpArr = [];
     cityData[city].forEach((el, i) => {
@@ -43,6 +56,7 @@ const RestaurantContainer = (props) => {
       console.log('City not Found!', error);
     }
   }, [city]);
+  
   useEffect(() => {
     if(isMounted.current) {
       try {
@@ -50,7 +64,7 @@ const RestaurantContainer = (props) => {
           console.log(currentVote);
           // console.log('in update votes');
           const { resto_id, action } = currentVote;
-          const response = await fetch('/api/', {
+          const response = await fetch('/api/resto/', {
             method: 'PATCH',
             body: JSON.stringify({ resto_id, action }),
             headers: {
