@@ -25,10 +25,13 @@ const Restaurant = (props) => {
         //   },
         // });
         const comments = [
-          { username: "Rami", body: "Hello" },
-          { username: "Kara", body: "Hello" },
-          { username: "Evan", body: "Hello" },
-          { username: "Andrew", body: "Hello" },
+          { username: "Rami", body: "Great restaurant!" },
+          { username: "Kara", body: "Love the food at andrews" },
+          { username: "Evan", body: "Best Andrews in USA" },
+          {
+            username: "Andrew",
+            body: "Hey I am andrew and more than happy to answer your questions!",
+          },
         ];
         setRestaurantComments(comments);
       } catch (error) {
