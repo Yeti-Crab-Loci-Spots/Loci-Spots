@@ -1,8 +1,19 @@
 import React from "react";
-import { render } from "react-dom";
-import App from "./App";
 import { createRoot } from "react-dom/client";
+
+import App from "./App";
+import Context from "./Context";
+// import { BrowserRouter } from 'react-router-dom';
+
 
 const container = document.getElementById("root");
 const root = createRoot(container);
-root.render(<App />);
+
+root.render(
+    <React.StrictMode>
+        <Context>
+            <App />
+        </Context>
+    </React.StrictMode>
+);
+
