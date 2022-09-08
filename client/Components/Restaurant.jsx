@@ -18,6 +18,8 @@ const Restaurant = (props) => {
   const handleDownVote = (e) => {
     setVote({ resto_id, action: 'downvote' });
   };
+
+
   const handleDelete = (e) => {
     (async () => {
       try {

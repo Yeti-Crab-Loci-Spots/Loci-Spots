@@ -29,10 +29,10 @@ const AddRestaurant = (props) => {
       ...restaurantData,
       [name]: value,
     });
-    console.log(restaurantData);
+    // console.log(restaurantData);
   };
   const handleSubmit = async (e) => {
-    console.log(restaurantData);
+    // console.log(restaurantData);
     const restaurantObj = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
