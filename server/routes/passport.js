@@ -7,7 +7,7 @@ const GITHUB_CLIENT_SECRET = '581829d6f3ec584193d85ed96a3e72949945da1c';
 const db = require('../models/restaurantModel');
 
 passport.serializeUser(function (user, done) {
-  done(null, user.username);
+  done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {
@@ -19,19 +19,49 @@ passport.use(new GitHubStrategy({
   clientSecret: GITHUB_CLIENT_SECRET,
   callbackURL: 'http://localhost:8080/auth/github/callback'
 },
-  function async(accessToken, refreshToken, profile, done) {
-    console.log({ profile });
+  function (accessToken, refreshToken, profile, done) {
     console.log({ accessToken });
     // if user exsists return userID, if user does not exsist we want to return insert user into user table and return id
     const getUserQueryString = `
     SELECT u.user_id
-    FROM user u
-    WHERE u.github_id=$1
-    LIMIT 1`
-    let params = [profile.username]
-    const getUserQueryResult = db.query(getUserQueryString, params);
-    console.log({ getUserQueryResult });
-    return done(null, profile);
+    FROM public.user u
+    WHERE github_id=$1
+    LIMIT 1
+    `
+    const params = [profile.username];
+    const stringToNumber = (str) => {
+      str = str.toLowerCase();
+      return str.slice(0, 5).split('').map(c => {
+        if(c.match(/[^a-zA-Z]/)) return '';
+        return c.charCodeAt(0) - 97;
+      })
+      .join('');
+    }
+
+    db.query(getUserQueryString, params)
+      .then(r => {
+        console.log(r);
+        if(r.rows.length > 0) return r.rows[0].user_id
+        return null;
+      })
+      .then((response) => {
+        if(response){
+          console.log(`user id for ${profile.username} found. ID: ${response}`);
+          return done(null, response)
+        }
+        console.log(`user id for ${profile.username} not found.`);
+        const insertUserQuery = `
+        INSERT INTO public.user (user_id, github_id)
+        VALUES ($1, $2)
+        RETURNING user_id`
+        const params = [Number(stringToNumber(profile.username)), profile.username];
+        db.query(insertUserQuery, params)
+          .then(r => r.rows[0].user_id)
+          .then(response => {
+            console.log(`Created new user in DB for ${profile.username} not found. ID: ${response}`);
+            return done(null, response)
+          });
+      })
   }
 ));
 

@@ -4,20 +4,14 @@ const userVotesController = {};
 
 userVotesController.getVotes = async (req, res, next) => {
     try {
-        //GET /api/users/:id where :id is github ID;
+        //GET /api/users/:id where :id is the internal user id;
         const { id } = req.params;
-        // const innerSelect = `(SELECT user_id FROM user WHERE .github_id=$1 LIMIT 1)`;
         const outer = `
     SELECT v.resto_id, v.vote
     FROM public.user_resto_votes v 
     WHERE v.user_id=$1;`;
         const votes = await db.query(outer, [id]);
         res.locals.votes = votes.rows
-        // .reduce((accum, row) => {
-        //     const currRow = { [row.resto_id]: row.vote }
-        //     console.log({ currRow })
-        //     return { ...accum, [row.resto_id]: row.vote };
-        // }, {});
         return next();
     } catch (err) {
         return next({
