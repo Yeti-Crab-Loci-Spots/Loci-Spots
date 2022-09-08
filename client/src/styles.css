@@ -232,31 +232,13 @@ footer {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .comment{
   background-color:  rgb(250,250,250);
   border: 2px double black;
   border-radius: 5px;
   margin-bottom: 20px;
   padding: 20px;
-  width: 90%;
+  width: 94.5%;
   /*height: 10px;*/
   height: fit-content;
   display: flex;
@@ -269,6 +251,40 @@ footer {
 
 .comment:hover {
   transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.form_container{
+  margin-bottom: 15px;
+  background-color:  rgb(250,250,250);
+  border: 2px double black;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 20px;
+    display: flex;
+  align-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  
+}
+
+.form_container:hover {
+  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.newComment{
+ 
+  padding: 20px;
+  width: 90%;
+  /*height: 10px;*/
+  height: fit-content;
+  display: flex;
+  align-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 /*.form-inner {
    display: flex;
