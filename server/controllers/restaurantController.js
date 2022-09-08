@@ -19,12 +19,20 @@ const restaurantController = {};
 restaurantController.getRestaurants = async (req, res, next) => {
   console.log('in get restaurants');
   try {
-    const { city } = req.params;
-    const queryString = `
+    const { city, cuisine } = req.params;
+    const queryStringCity = `
     SELECT * FROM resto 
     WHERE city=$1
     ORDER BY votes DESC`;
-    const params = [city];
+
+    const queryStringCityCuisine = `
+    SELECT * FROM resto 
+    WHERE city=$1 AND cuisine=$2
+    ORDER BY votes DESC`;
+
+    const queryString = (cuisine === 'All') ? queryStringCity : queryStringCityCuisine
+
+    const params = [city, cuisine];
 
     const result = await db.query(queryString, params);
     res.locals.restaurants = { [city]: result.rows };
