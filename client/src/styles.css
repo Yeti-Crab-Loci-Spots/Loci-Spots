@@ -272,6 +272,8 @@ footer {
 }
 /*.form-inner {
    display: flex;
+.form-inner {
+  /* display: flex;
   justify-content: center;
   align-items: center; */
   /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
@@ -285,6 +287,8 @@ footer {
   justify-content: center; */
   
   /* grid-template-columns: 50px 1fr; }/*
+  /* grid-template-columns: 50px 1fr; */
+/* } */
 
 /* .login {
   width: 80px;
