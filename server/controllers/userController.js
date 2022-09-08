@@ -34,26 +34,34 @@ userController.validateUser = async (req, res, next) => {
 
     try {
         const { username, password } = req.body;
-        
+        console.log('password from req.body',password)
         const queryString = `
         SELECT * FROM users 
         WHERE username = '${username}'
-        AND password = '${password}';
+        ;
         `
         const result = await db.query(queryString);
 
         // bcrypt.compare(password, result.rowCount)
-        console.log(result.rowCount);
-        console.log(result.rows.password)
+        // console.log(result.rowCount);
+        // console.log(result.rows.password)
+        // console.log(result.rows[0].password)
         let valid = await bcrypt.compare(password, result.rows[0].password);
-        
-        if(result.rowCount === 0){
+        console.log('valid',valid);
+
+        console.log('result rows password:' ,result.rows[0].password)
+
+        if(valid){
+            res.locals.info = result.rows[0];
+        console.log('res.locals.info',res.locals.info);
+        console.log('password from database', res.locals.info.password)
+        return next();
+        }
+        else{
             throw new Error('Invalid user');
         }
         // console.log('result in userController validate user', result);
-        res.locals.info = result.rows[0];
-        console.log(res.locals.info);
-        return next();
+        
     }
     catch (err) {
         return next({
