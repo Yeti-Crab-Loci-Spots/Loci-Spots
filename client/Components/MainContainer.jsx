@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import DropDownList from './DropDownList';
 
+
 const MainContainer = ({user}) => {
   //main container will store the state of the drop down list and the state of the restaurant container which contains a list of the restaurants
   const [city, setCity] = useState('New York');

@@ -24,11 +24,11 @@ function LoginForm({login, error}){
                 <h2>Login</h2>
                 <div className = "form-group">
                     <label htmlFor ="username">Username:</label>
-                    <input type = "text" name ="username" id ="username" onChange = {e => setDetails({...details, username: e.target.value})} value = {details.username} />
+                    <input placeholder='Enter Username' type = "text" name ="username" id ="username" onChange = {e => setDetails({...details, username: e.target.value})} value = {details.username} />
                 </div>
                 <div className="formgroup">
                     <label htmlFor = "password">Password:</label>
-                    <input type = "password" name ="password" id ="password" onChange = {e => setDetails({...details, password: e.target.value})} value = {details.password}/>
+                    <input placeholder='Enter Password' type = "password" name ="password" id ="password" onChange = {e => setDetails({...details, password: e.target.value})} value = {details.password}/>
                 </div>
     
                 <input type="submit" value="Login" />

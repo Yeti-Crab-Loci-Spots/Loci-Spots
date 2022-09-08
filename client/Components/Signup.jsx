@@ -3,26 +3,29 @@ import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignupForm from "./SignupForm";
 import axios from 'axios';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
 
 const Signup = () =>{
+
+    const[signupForm, setSignupForm ] = useState(false);
 
     const signup = (details) => {
         const {name, username, password} = details;
         console.log('here are details',details);
-        //see if username and password combo are in the database
-        //if(axios.get('/username') ?)
-        // axios.post('/signup', {
-        //     name: name,
-        //     username: username,
-        //     password: password
-        // });
-        fetch('/api/signup', {
-            method: 'POST',
-            body: JSON.stringify(details),
-            headers: {
-              'Content-Type': 'application/json',
-            }
-        })
+
+        if(name && username && password){
+            fetch('/api/signup', {
+                method: 'POST',
+                body: JSON.stringify(details),
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+            })
+            setSignupForm(true);
+        }
+        
         
     };
 
@@ -33,7 +36,7 @@ const Signup = () =>{
                 <button className = "back">Back</button>
             </Link>
             <SignupForm signup = {signup} />
-
+            <div>{signupForm ? <Alert severity="success">New Account Created!</Alert> :<Alert severity="warning">Invalid credentials</Alert>  }</div>
         </div>
     );
 }
