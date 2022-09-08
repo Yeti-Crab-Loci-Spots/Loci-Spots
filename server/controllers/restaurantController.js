@@ -30,7 +30,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
           SUM(user_resto_votes.vote) AS votes
     FROM resto
     LEFT OUTER JOIN user_resto_votes ON resto.resto_id = user_resto_votes.resto_id`;
-    const queryString2 = `
+    let queryString2 = `
     WHERE resto.city = $1`
     const queryString3 = `
     GROUP BY resto.resto_id, 
@@ -40,8 +40,11 @@ restaurantController.getRestaurants = async (req, res, next) => {
               resto.foodtype, 
               resto.link
     ORDER BY votes`;
-    if(cuisine !== 'All') queryString2 += 'AND resto.foodtype = $2'
-    const params = [city, cuisine];
+    const params = [city];
+    if(cuisine !== 'All'){
+      queryString2 += 'AND resto.foodtype = $2'
+      params.push(cuisine);
+    }
     const queryString = queryString1 + queryString2 + queryString3;
     const result = await db.query(queryString, params);
     res.locals.restaurants = { [city]: result.rows };
@@ -60,12 +63,12 @@ restaurantController.addRestaurant = async (req, res, next) => {
   console.log(req.body);
   try {
     console.log('inside of addRestaurant');
-    const { name, address, city, foodType, link } = req.body;
+    const { name, address, city, foodType, link, user_id } = req.body;
 
     const queryString = `
-    INSERT INTO resto (restoName,address,city,foodType,link, add_by_user)
+    INSERT INTO resto (restoName, address, city, foodType, link, add_by_user)
     VALUES ( $1, $2, $3, $4, $5, $6);`;
-    const params = [name, address, city, foodType, link, req.user];
+    const params = [name, address, city, foodType, link, user_id];
     const result = await db.query(queryString, params);
     // console.log(result);
     // res.locals.addedRestaurant = result;
