@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-// const bcrypt = require('bcrypt');
-const SALT = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
+
+
+import { Link } from 'react-router-dom';
 
 function SignupForm({signup, error}){
     const [details, setDetails] = useState({
@@ -12,11 +12,11 @@ function SignupForm({signup, error}){
 
     const submitHandler = e =>{
         e.preventDefault();
-
+        
+        
         signup(details);
-    }
 
-    // bcrypt.genSalt()
+    }
 
     return (
         <form onSubmit = {submitHandler}>
@@ -34,7 +34,10 @@ function SignupForm({signup, error}){
                     <label htmlFor = "password">Password:</label>
                     <input type = "password" name ="password" id ="password" onChange = {e => setDetails({...details, password: e.target.value})} value = {details.password}/>
                 </div>
-                <input type="submit" value="Signup" />
+                
+                {/* <Link to ='/login'>  */}
+                <input className = "login" type="submit" value="Signup" />
+                {/* </Link> */}
             </div>
         </form>
     )
