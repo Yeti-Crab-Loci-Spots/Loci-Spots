@@ -226,22 +226,22 @@ footer {
 }
 
 .form-inner {
-  /* display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center; */
-  /* box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  align-items: center; 
+  text-align:left;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   margin-bottom: 20px;
   padding: 20px;
   border-radius: 10px;
   display: grid;
-  font-size: 20px; */
-  /* align-items: center;
-  justify-content: center; */
-  
-  /* grid-template-columns: 50px 1fr; */
-}
+  font-size: 20px;   
+
+} 
 
 /* .login {
   width: 80px;
 } */
+
+

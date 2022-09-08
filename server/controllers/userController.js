@@ -47,14 +47,14 @@ userController.validateUser = async (req, res, next) => {
         // console.log(result.rows.password)
         // console.log(result.rows[0].password)
         let valid = await bcrypt.compare(password, result.rows[0].password);
-        console.log('valid',valid);
+        // console.log('valid',valid);
 
-        console.log('result rows password:' ,result.rows[0].password)
+        // console.log('result rows password:' ,result.rows[0].password)
 
         if(valid){
             res.locals.info = result.rows[0];
-        console.log('res.locals.info',res.locals.info);
-        console.log('password from database', res.locals.info.password)
+        // console.log('res.locals.info',res.locals.info);
+        // console.log('password from database', res.locals.info.password)
         return next();
         }
         else{
