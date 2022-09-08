@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const restoApiRouter = require("./routes/restoApi");
+const userVotesRouter = require("./routes/userApi");
 const cookieSession = require('cookie-session')
 const passport = require('passport');
 require('./routes/passport') // MLCK?
@@ -28,8 +29,8 @@ if (process.env.NODE_ENV === "production") {
 /**
  * define route handlers
  */
- 
- app.use(cookieSession({
+
+app.use(cookieSession({
   name: 'github-auth-session',
   keys: ['key1', 'key2']
 }))
@@ -37,20 +38,21 @@ if (process.env.NODE_ENV === "production") {
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/auth/success', (req,res)=>{
+app.get('/auth/success', (req, res) => {
   res.send(`Hello world ${req.user}`)
-  });
+});
 
 app.get('/auth/error', (req, res) => res.send('Unknown Error'));
 
-app.get('/auth/github', passport.authenticate('github',{ scope: [ 'user' ] }));
+app.get('/auth/github', passport.authenticate('github', { scope: ['user'] }));
 app.get('/auth/github/callback', passport.authenticate('github'),
-function(req, res) {
-  res.redirect('/auth/success')
-});
+  function (req, res) {
+    res.redirect('/auth/success')
+  });
 
 
 app.use("/api/resto", restoApiRouter);
+app.use('/api/user', userVotesRouter);
 
 /**
  * catch-all for unknown routes

@@ -6,13 +6,13 @@ userVotesController.getVotes = async (req, res, next) => {
     try {
         //GET /api/users/:id where :id is github ID;
         const { id } = req.params;
-        const innerSelect = `(SELECT u.user_id FROM <users u>  WHERE u.github_id=$1 LIMIT 1)`;
+        // const innerSelect = `(SELECT user_id FROM user WHERE .github_id=$1 LIMIT 1)`;
         const outer = `
     SELECT v.resto_id, v.vote
     FROM public.user_resto_votes v 
-    WHERE v.user_id=${innerSelect};`;
+    WHERE v.user_id=$1;`;
         const votes = await db.query(outer, [id]);
-        res.locals.votes = votes;
+        res.locals.votes = votes.rows;
         return next();
     } catch (err) {
         return next({
@@ -26,15 +26,16 @@ userVotesController.getVotes = async (req, res, next) => {
 userVotesController.updateVotes = async (req, res, next) => {
     try {
         const { user_id, resto_id, action } = req.body;
+        let votes;
         if (action === 'upvote') votes = 1
         if (action === 'downvote') votes = -1
         if (action === 'unvote') votes = 0
         const params = [user_id, resto_id, votes]
         const queryString = `
-            INSERT INTO uservotes(user_id, resto_id, votes)
+            INSERT INTO user_resto_votes (user_id, resto_id, vote)
             VALUES($1, $2, $3)
             ON CONFLICT (user_id, resto_id) 
-            DO UPDATE SET votes = $3
+            DO UPDATE SET vote = $3
             WHERE user_resto_votes.resto_id=$1 AND user_resto_votes.user_id=$2
         `
         await db.query(queryString, params)
