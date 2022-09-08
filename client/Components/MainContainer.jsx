@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RestaurantContainer from './RestaurantContainer';
 import Logo from '../src/media/LociSpotLogo.png';
 
+
 import DropDownList from './DropDownList';
 
 const MainContainer = () => {
