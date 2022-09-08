@@ -9,8 +9,8 @@ const restaurantController = require('../controllers/restaurantController');
 /**
  * GET REQUESTS, return list of restaurants by city
  */
-router.get('/:city', restaurantController.getRestaurants, (req, res) => {
-  // console.log('getResto: Success!!!');
+router.get('/:city/:cuisine', restaurantController.getRestaurants, (req, res) => {
+  console.log('getResto: Success!!!');
   res.status(200).json(res.locals.restaurants);
 });
 
