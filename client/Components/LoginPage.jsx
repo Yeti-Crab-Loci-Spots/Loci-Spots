@@ -2,12 +2,17 @@ import React, {useState} from "react";
 import { Link } from 'react-router-dom';
 import LoginForm from "./LoginForm";
 
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const LoginPage = () =>{
 
     const [user, setUser] = useState({username:'', password:''});
     const [error, setError] = useState('');
+    const [loginStatus, setLoginStatus] = useState(false);
 
     // window.sessionStorage.setItem('isLoggedIn', false);
 
@@ -40,6 +45,7 @@ const LoginPage = () =>{
         if(result.status === 200){
             sessionStorage.setItem('isLoggedIn', true);
             sessionStorage.setItem('name', parsedResult);
+            setLoginStatus(true);
         }
     }
 
@@ -50,6 +56,9 @@ const LoginPage = () =>{
                 <button className = "back">Back</button>
             </Link>
             <LoginForm login = {login} error = {error} />
+
+            <div>{loginStatus ? <Alert severity="success">Successful login!</Alert> :<Alert severity="error">Currently not logged in.</Alert>  }</div>
+            
         </div>
     );
 }
