@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CommentSection from "./CommentsSection";
 
 const Restaurant = (props) => {
+  const [newComment, setComment] = useState("");
   const { restoObj, setVote, currentVote, setDeleted } = props;
   const { resto_id, restoname, address, city, foodtype, link, votes } =
     restoObj;
@@ -25,10 +26,13 @@ const Restaurant = (props) => {
         //   },
         // });
         const comments = [
-          { username: "Rami", body: "Hello" },
-          { username: "Kara", body: "Hello" },
-          { username: "Evan", body: "Hello" },
-          { username: "Andrew", body: "Hello" },
+          { username: "Rami", body: "Great restaurant!" },
+          { username: "Kara", body: "Love the food at andrews" },
+          { username: "Evan", body: "Best Andrews in USA" },
+          {
+            username: "Andrew",
+            body: "Hey I am andrew and more than happy to answer your questions!",
+          },
         ];
         setRestaurantComments(comments);
       } catch (error) {
@@ -64,6 +68,23 @@ const Restaurant = (props) => {
   };
 
   console.log(showComments);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let comment = { username: "rami", body: newComment, resto_id: resto_id };
+    console.log(comment);
+    // const res = await axios.post(url, comment) //Kara/Evan please set up a POST route to send the comment to the database. We will also send the re
+    setRestaurantComments([comment, ...restaurantComments]);
+    setComment("");
+  };
+
+  //handleChange is built into input field and it gets triggered every time we interact with the input field.
+  //Remember: e symbolizes the event that is happening. It records all the data, all the creepy things the user is typing, we have acceSS  to. Oh my God indeed.
+  const handleChange = (e) => {
+    //{currentTarget:input} is default in the input field. When input field gets changed, it will give you information of what was triggered, whats new value, etc.
+    // console.log("I am current target!!!:", input);
+    setComment(e.target.value); //updating data from the state. In this case, as user types in every keystroke, it will change data set in useState
+  };
 
   return (
     <div>
@@ -103,7 +124,24 @@ const Restaurant = (props) => {
           </p>
         </div>
       </div>
-      {showComments && <CommentSection comments={restaurantComments} />}
+      {showComments && (
+        <div>
+          <form className={"form_container"} onSubmit={handleSubmit}>
+            <h4>Add your wonderful comment below ...</h4>
+            <input //html input
+              type="text"
+              placeholder="comment"
+              name="firstName"
+              onChange={handleChange} //onChange gets triggered when user interacts with input, in this case the text placeholder
+              value={newComment} //every keystroke saves to value which we can use in input from handleChange function definition.
+              required
+              className={"newComment"}
+            />
+            <button type="submit">Add Comment</button>
+          </form>
+          <CommentSection comments={restaurantComments} />
+        </div>
+      )}
     </div>
   );
 };
