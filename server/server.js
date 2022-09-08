@@ -6,9 +6,15 @@ const cookieSession = require('cookie-session')
 const passport = require('passport');
 const { user } = require("pg/lib/defaults");
 require('./routes/passport') // MLCK?
+const cors = require('cors');
 
 const PORT = 3000;
 
+
+// app.use(
+//   cors({
+//     origin: 'http://localhost:8080',
+// }));
 
 /**
  * Handle parsing request body
@@ -30,6 +36,7 @@ if (process.env.NODE_ENV === "production") {
 /**
  * define route handlers
  */
+
  
  app.use(cookieSession({
   name: 'github-auth-session',

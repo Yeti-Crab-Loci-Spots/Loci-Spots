@@ -1,39 +1,25 @@
-import React, { Fragment } from 'react';
+import React, { useContext } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './styles.css';
+
 import MainContainer from '../Components/MainContainer'
 import LoginPage from '../Pages/LoginPage';
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { myContext } from './Context';
 
- 
 
 const App = (props) => {
 
-  const [userToken, setUserToken] = useState('');
+  const user = useContext(myContext);
 
-  useEffect( () => {
-    // Fetch does not send cookies. So you should add credentials: 'include'
-    fetch("http://localhost:3000/auth", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true
-      }
-    })
-      .then(responseJson => {
-        setUserToken(responseJson.userId);
-      })
-    })
+  console.log('this is: ', user);
 
   return (
-    <div>
+    <BrowserRouter>
       <Routes>
-        <Route 
-          path="/" 
-          element={userToken ? <MainContainer/> : <LoginPage />}/>
+        <Route path='/' 
+        element={user ? <MainContainer/> : <LoginPage />} />
       </Routes>
-    </div>
+    </BrowserRouter>
   );
 };
 

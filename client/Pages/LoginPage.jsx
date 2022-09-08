@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import { Button } from '@mui/material';
 import { Box } from '@mui/material';
+import { useState, useEffect} from 'react';
 
 const LoginPage = (props) => {
 
@@ -8,7 +9,7 @@ const LoginPage = (props) => {
   const githubAuth = () => {
     window.open('/auth/github', '_self');
   }
-  
+    
   return (
     <Box
       display = 'flex'
