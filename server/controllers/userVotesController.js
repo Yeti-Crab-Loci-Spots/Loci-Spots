@@ -12,7 +12,12 @@ userVotesController.getVotes = async (req, res, next) => {
     FROM public.user_resto_votes v 
     WHERE v.user_id=$1;`;
         const votes = await db.query(outer, [id]);
-        res.locals.votes = votes.rows;
+        res.locals.votes = votes.rows
+        // .reduce((accum, row) => {
+        //     const currRow = { [row.resto_id]: row.vote }
+        //     console.log({ currRow })
+        //     return { ...accum, [row.resto_id]: row.vote };
+        // }, {});
         return next();
     } catch (err) {
         return next({
