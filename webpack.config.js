@@ -54,7 +54,6 @@ const config = {
     ],
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
-  
   plugins: [new HtmlWebpackPlugin({ template: "./client/src/index.html" })],
 };
 

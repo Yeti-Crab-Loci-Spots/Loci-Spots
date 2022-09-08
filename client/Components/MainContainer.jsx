@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import RestaurantContainer from './RestaurantContainer';
 import Logo from '../src/media/LociSpotLogo.png';
 import { Link } from 'react-router-dom';
-import LoginPage from './LoginPage';
+
 import DropDownList from './DropDownList';
 
-const MainContainer = ({user}) => {
+const MainContainer = () => {
   //main container will store the state of the drop down list and the state of the restaurant container which contains a list of the restaurants
   const [city, setCity] = useState('New York');
   /**
@@ -13,11 +13,6 @@ const MainContainer = ({user}) => {
    */
   const [cities, setCities] = useState(['New York', 'Toronto', 'Omaha']);
   //each object will contain key value pair of the city and an array of restaurants
-
-  const logout = () =>{
-    sessionStorage.clear();
-    window.location.reload(false);
-  }
 
 
   useEffect(() => {}, [city]);
@@ -29,20 +24,20 @@ const MainContainer = ({user}) => {
           <span className='citySearch'>
             <DropDownList setCity={setCity} city={city} cityList={cities} />
           </span>
+          <span className ="loginsignup">
 
-          <div>{sessionStorage.getItem('isLoggedIn') ? <div className ="loginsignup">Welcome {sessionStorage.getItem('name')} <button className = "logout" onClick = {logout}>Logout</button></div> :  <span className ="loginsignup">
-          <Link to ='/signup'>
+            {/*if user is not logged in, show these buttons, else show "XYZ is logged in and a logout button"  */}
+        <Link to ='/signup'>
           <button className='Signup'>
           Signup
         </button>
         </Link>
-        <Link to = '/login' >
+        <Link to = '/login'>
         <button className='login'>
           Login
         </button>
         </Link>
-          </span>}</div>
-
+          </span>
         </div>
         
       </div>

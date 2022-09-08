@@ -20,19 +20,13 @@ router.get('/:city', restaurantController.getRestaurants, (req, res) => {
  */
  router.post('/signup', userController.addUser, (req, res) => {
   console.log('addUser: Success!!!');
-  res.status(200).send('User successfully added!');
+  res.status(200).send('User successfully added!').redirect('/login');
 });
 
 router.post('/', restaurantController.addRestaurant, (req, res) => {
   console.log('postResto: Success!!!');
   res.status(200).send('Restaurant successfully added!');
 });
-
-router.post('/login', userController.validateUser, (req, res) =>{
-  console.log('validateUser: Success!!');
-  // console.log(res.locals.info);
-  res.status(200).json(res.locals.info.name);
-})
 
 
 
