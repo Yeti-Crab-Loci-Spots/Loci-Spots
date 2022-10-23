@@ -33,14 +33,14 @@ html {
 
 .nav {
   background-color: #fff6e9;
-
+  width: 100%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .nav-container {
   display: flex;
   justify-content: center;
-  width: 800px;
+  width: 80%;
   position: relative;
   height: 100px;
   margin: 0 auto;
@@ -141,6 +141,8 @@ button:hover {
 .infoSection {
   position: relative;
   padding: 0 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 a:hover {
@@ -214,4 +216,70 @@ footer {
   color: rgba(0, 0, 0, 0.5);
   text-align: center;
   margin: 20px auto;
+}
+
+@media screen and (min-width:360px) and (max-width:851px) {
+  .nav {
+    background-color: #fff6e9;
+    width: 100vw;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    height: 10vh;
+    margin: 0 auto;
+  }
+  .restaurantContainer {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-items: center;
+    width: 100vw;
+  }
+  .restaurant-container {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    width: 100vw;
+
+  }
+  .cityName {
+    font-size: 60px;
+    font-weight: 900;
+    color: #ffb33f;
+    margin-bottom: 20px;
+  }
+
+  .restaurantsList {
+    width: 80vw;
+    margin: 0 auto;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .resto-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffb33f;
+    margin-bottom: 10px;
+    width: 70vw;
+  }
+  .info-text {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  .cuisine {
+    font-size: 20px;
+  }
 }
