@@ -1,9 +1,10 @@
+const dotenv = require('dotenv').config();
 const path = require("path");
 const express = require("express");
 const app = express();
 const apiRouter = require("./routes/api");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 /**
  * Handle parsing request body
